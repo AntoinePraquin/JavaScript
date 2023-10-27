@@ -1,0 +1,50 @@
+class Pokemon {
+    constructor(name, attack, defense, hp, luck) {
+        this.name = name
+        this.attack = attack
+        this.defense = defense
+        this.hp = hp
+        this.luck = luck
+    }
+
+    isLucky(){
+
+        if (Math.random() < this.luck) {
+            return true;
+        }
+
+        return false;
+    
+    }
+
+    attackpokemon(pokemon){
+        let degats = 0
+        if(this.isLucky()) {
+        degats = this.attack - pokemon.defense;
+        }
+        pokemon.hp = (pokemon.hp - degats);
+    }
+
+}
+
+let pokemon1 = new Pokemon("Pikatchu", 120, 30, 200, 0.4);
+let pokemon2 = new Pokemon("Salamèche", 110, 40, 200, 0.5)
+
+while(pokemon1.hp > 0 && pokemon2.hp > 0) {
+    
+    pokemon1.attackpokemon(pokemon2);
+    console.log("hp restant : " + pokemon2.hp + ", dégats infliger = " + (pokemon1.attack-pokemon2.defense));
+    pokemon2.attackpokemon(pokemon1);
+    console.log("hp restant : " + pokemon1.hp + ", dégats infliger = " + (pokemon2.attack-pokemon1.defense));
+
+
+    if(pokemon1.hp <= 0){
+        console.log(pokemon1.name + " mort");
+        break;
+    } else if(pokemon2.hp <= 0){
+        console.log(pokemon2.name + " mort");
+        break
+    }
+}
+
+
